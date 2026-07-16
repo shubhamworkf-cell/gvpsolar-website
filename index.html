@@ -42,60 +42,433 @@ body{font-family:'Inter',sans-serif;color:var(--text);overflow-x:hidden;-webkit-
 img,video{max-width:100%;height:auto;display:block}
 
 /* ─── HEADER ─── */
-#header{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 var(--px);transition:background .35s var(--ease),box-shadow .35s var(--ease),backdrop-filter .35s var(--ease)}
-#header.scrolled{background:rgba(7,27,52,.82);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);box-shadow:0 1px 0 rgba(255,255,255,.06),0 16px 48px rgba(0,0,0,.22);--nav-h:72px;--logo-h:54px;--logo-text-gvp-sz:22px;--logo-text-energy-sz:18px;--nav-link-pad:6px 10px;--nav-cta-pad:8px 14px}
-#header.scrolled ~ .page-nav{--page-nav-h:44px;--page-nav-fs:11px;--page-nav-pad:0 14px}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:var(--nav-h);gap:16px;transition:height .35s var(--ease)}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0;padding:0 4px;transition:gap .35s var(--ease),transform .3s var(--ease)}
-.logo:hover{transform:scale(1.02)}
-.logo-img{height:var(--logo-h);width:auto;display:block;flex-shrink:0;image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges;-webkit-backface-visibility:hidden;backface-visibility:hidden;transition:height .35s var(--ease)}
-.logo-img.footer-logo-img{height:clamp(36px,4.5vw,50px);filter:brightness(0) invert(1);opacity:.92;transition:none}
-.logo-text{display:flex;flex-direction:column;line-height:1.05;font-family:'Montserrat',sans-serif;font-weight:900;letter-spacing:2px;text-transform:uppercase}
-.logo-text-gvp{font-size:var(--logo-text-gvp-sz);color:#0A2342;transition:font-size .35s var(--ease),color .35s var(--ease)}
-#header.scrolled .logo-text-gvp{color:#FFFFFF}
-.logo-text-energy{font-size:var(--logo-text-energy-sz);color:#F5A623;transition:font-size .35s var(--ease)}
-.nav-links{display:flex;gap:4px;list-style:none;flex-wrap:nowrap;transition:gap .35s var(--ease)}
-#header.scrolled .nav-links{gap:2px}
-.nav-links a{color:rgba(255,255,255,.78);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s,background .2s,padding .35s var(--ease);padding:var(--nav-link-pad);border-radius:9px;white-space:nowrap}
-.nav-links a:hover{color:var(--white);background:rgba(255,255,255,.08)}
-.nav-cta{background:linear-gradient(135deg,var(--gold),var(--yellow))!important;color:var(--navy)!important;padding:var(--nav-cta-pad)!important;border-radius:10px!important;font-weight:800!important;box-shadow:0 4px 16px rgba(245,166,35,.38)!important;transition:transform .3s,box-shadow .3s,padding .35s var(--ease)!important;white-space:nowrap;font-size:13px!important}
-.nav-cta:hover{transform:translateY(-2px)!important;box-shadow:0 8px 28px rgba(245,166,35,.55)!important}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border-radius:9px;transition:background .25s;min-width:40px;min-height:40px;align-items:center;justify-content:center;flex-shrink:0}
-.hamburger:hover,.hamburger:focus-visible{background:rgba(255,255,255,.08);outline:none}
-.hamburger span{display:block;width:22px;height:2px;background:#fff;border-radius:2px;transition:transform .35s var(--ease),opacity .25s,background .25s}
-.hamburger.is-active span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.hamburger.is-active span:nth-child(2){opacity:0;transform:scaleX(0)}
-.hamburger.is-active span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 var(--px);
+  background: transparent;
+  transition: background 0.25s var(--ease), box-shadow 0.25s var(--ease), backdrop-filter 0.25s var(--ease);
+}
+#header.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05), 0 12px 32px rgba(0, 0, 0, 0.06);
+  --nav-h: 72px;
+  --logo-h: 54px;
+  --logo-text-gvp-sz: 22px;
+  --logo-text-energy-sz: 18px;
+  --nav-link-pad: 6px 10px;
+  --nav-cta-pad: 8px 14px;
+}
+#header.scrolled ~ .page-nav {
+  margin-top: 72px;
+  top: 72px;
+  --page-nav-h: 44px;
+  --page-nav-fs: 11px;
+  --page-nav-pad: 0 14px;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-h);
+  gap: 16px;
+  transition: height 0.25s var(--ease);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+  padding: 0 4px;
+  transition: gap 0.25s var(--ease), transform 0.3s var(--ease);
+}
+.logo:hover {
+  transform: scale(1.02);
+}
+.logo-img {
+  height: var(--logo-h);
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: height 0.25s var(--ease);
+}
+.logo-img.footer-logo-img {
+  height: clamp(36px, 4.5vw, 50px);
+  filter: brightness(0) invert(1);
+  opacity: 0.92;
+  transition: none;
+}
+.logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.logo-text-gvp {
+  font-size: var(--logo-text-gvp-sz);
+  color: #FFFFFF;
+  transition: font-size 0.35s var(--ease), color 0.25s var(--ease);
+}
+#header.scrolled .logo-text-gvp {
+  color: #0B2A4A;
+}
+.logo-text-energy {
+  font-size: var(--logo-text-energy-sz);
+  color: #F5B321;
+  transition: font-size 0.35s var(--ease), color 0.25s var(--ease);
+}
+#header.scrolled .logo-text-energy {
+  color: #F5B321;
+}
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  flex-wrap: nowrap;
+  transition: gap 0.25s var(--ease);
+}
+#header.scrolled .nav-links {
+  gap: 2px;
+}
+.nav-links a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: color 0.25s var(--ease), background-color 0.25s var(--ease), padding 0.35s var(--ease);
+  padding: var(--nav-link-pad);
+  border-radius: 9px;
+  white-space: nowrap;
+}
+.nav-links a:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+}
+#header.scrolled .nav-links a {
+  color: #0B2A4A;
+}
+#header.scrolled .nav-links a:hover {
+  color: var(--blue);
+  background: rgba(30, 111, 191, 0.08);
+}
+.nav-cta {
+  background: linear-gradient(135deg, var(--gold), var(--yellow)) !important;
+  color: var(--navy) !important;
+  padding: var(--nav-cta-pad) !important;
+  border-radius: 10px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 4px 16px rgba(245, 166, 35, 0.38) !important;
+  transition: transform 0.3s, box-shadow 0.3s, padding 0.35s var(--ease) !important;
+  white-space: nowrap;
+  font-size: 13px !important;
+}
+.nav-cta:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 28px rgba(245, 166, 35, 0.55) !important;
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 9px;
+  transition: background 0.25s;
+  min-width: 40px;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.hamburger:hover, .hamburger:focus-visible {
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+}
+#header.scrolled .hamburger:hover, #header.scrolled .hamburger:focus-visible {
+  background: rgba(0, 0, 0, 0.05);
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.35s var(--ease), opacity 0.25s, background 0.25s;
+}
+#header.scrolled .hamburger span {
+  background: #0B2A4A;
+}
+.hamburger.is-active span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger.is-active span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.hamburger.is-active span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
 
 /* ─── MOBILE NAV ─── */
-.mobile-nav{display:none;flex-direction:column;background:rgba(4,12,28,.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:0 var(--px) 8px;border-top:1px solid rgba(255,255,255,.06);overflow:hidden}
-.mobile-nav.open{display:flex}
-.mobile-nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:clamp(14px,2vw,15px);font-weight:500;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.05);transition:color .2s,padding-left .2s;display:block;min-height:50px;display:flex;align-items:center}
-.mobile-nav a:hover{color:var(--white);padding-left:10px}
-.mobile-nav a:last-child{border:none;color:var(--gold);font-weight:700;padding-bottom:20px}
+.mobile-nav {
+  display: none;
+  flex-direction: column;
+  background: rgba(4, 12, 28, 0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  padding: 0 var(--px) 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.mobile-nav.open {
+  display: flex;
+}
+.mobile-nav a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  font-size: clamp(14px, 2vw, 15px);
+  font-weight: 500;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: color 0.25s, padding-left 0.2s, border-color 0.25s;
+  display: block;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+}
+.mobile-nav a:hover {
+  color: var(--white);
+  padding-left: 10px;
+}
+.mobile-nav a:last-child {
+  border: none;
+  color: var(--gold);
+  font-weight: 700;
+  padding-bottom: 20px;
+}
+#header.scrolled .mobile-nav {
+  background: rgba(255, 255, 255, 0.98);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+#header.scrolled .mobile-nav a {
+  color: #0B2A4A;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+#header.scrolled .mobile-nav a:hover {
+  color: var(--blue);
+}
+#header.scrolled .mobile-nav a:last-child {
+  color: var(--gold);
+}
 
 /* ─── PAGE NAV ─── */
-.page-nav{background:rgba(255,255,255,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(0,0,0,.07);padding:0 var(--px);position:sticky;z-index:100;overflow-x:auto;white-space:nowrap;display:flex;scrollbar-width:none;-ms-overflow-style:none;box-shadow:0 4px 20px rgba(0,0,0,.06);height:var(--page-nav-h);transition:height .3s var(--ease)}
+.page-nav {
+  margin-top: var(--nav-h);
+  top: var(--nav-h);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  padding: 0 var(--px);
+  position: sticky;
+  z-index: 100;
+  overflow-x: auto;
+  white-space: nowrap;
+  display: flex;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  height: var(--page-nav-h);
+  transition: margin-top 0.25s var(--ease), top 0.25s var(--ease), height 0.3s var(--ease);
+}
 .page-nav::-webkit-scrollbar{display:none}
 .page-nav a{display:inline-flex;align-items:center;height:100%;padding:var(--page-nav-pad);color:var(--text2);text-decoration:none;font-size:var(--page-nav-fs);font-weight:600;border-bottom:2.5px solid transparent;transition:color .25s,border-color .25s,font-size .3s var(--ease),padding .3s var(--ease);letter-spacing:.3px;flex-shrink:0}
 .page-nav a:hover,.page-nav a.active{color:var(--blue);border-bottom-color:var(--blue)}
 
 /* ─── HERO ─── */
-#hero{min-height:100svh;min-height:100vh;background:var(--navy);position:relative;display:flex;align-items:center;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#071b34 0%,#0b2448 45%,#060f20 100%)}
-.hero-pattern{position:absolute;inset:0;opacity:.02;background-image:repeating-linear-gradient(0deg,#fff 0,#fff 1px,transparent 1px,transparent 72px),repeating-linear-gradient(90deg,#fff 0,#fff 1px,transparent 1px,transparent 72px)}
-.hero-glow,.hero-glow2,.hero-glow3{position:absolute;border-radius:50%;will-change:transform}
-.hero-glow{width:min(1000px,150vw);height:min(1000px,150vw);background:radial-gradient(circle,rgba(30,111,191,.15) 0%,transparent 70%);top:-30%;right:-20%;animation:glowDrift 9s ease-in-out infinite}
-.hero-glow2{width:min(700px,120vw);height:min(700px,120vw);background:radial-gradient(circle,rgba(245,166,35,.08) 0%,transparent 70%);bottom:-15%;left:-20%;animation:glowDrift 11s ease-in-out infinite reverse}
-.hero-glow3{width:min(350px,60vw);height:min(350px,60vw);background:radial-gradient(circle,rgba(30,111,191,.1) 0%,transparent 70%);top:40%;left:35%;animation:glowDrift 7s ease-in-out infinite 3s}
-@keyframes glowDrift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(20px,-25px) scale(1.04)}66%{transform:translate(-15px,15px) scale(.97)}}
-.hero-content{position:relative;z-index:2;max-width:1220px;margin:0 auto;padding:clamp(88px,12vw,120px) var(--px) clamp(48px,7vw,72px);width:100%}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,166,35,.09);border:1px solid rgba(245,166,35,.22);color:var(--gold);padding:clamp(7px,1vw,10px) clamp(14px,2vw,20px);border-radius:50px;font-size:clamp(9px,1.2vw,11px);font-weight:700;letter-spacing:clamp(1.2px,.2em,2px);text-transform:uppercase;margin-bottom:clamp(18px,3vw,32px);animation:fadeDown .9s ease both;backdrop-filter:blur(10px)}
-.hero-badge::before{content:'⚡';font-size:11px}
-.hero-h1{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(26px,6.5vw,70px);color:var(--white);line-height:1.07;margin-bottom:clamp(14px,2.5vw,28px);animation:fadeUp .9s .2s ease both;letter-spacing:clamp(-.3px,-0.015em,-1.5px);word-break:break-word}
-.hero-h1 span{background:linear-gradient(135deg,#f5a623,#ffd234 55%,#ffb347);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block}
-.hero-sub{font-size:clamp(13px,2vw,18px);color:rgba(255,255,255,.65);line-height:1.85;max-width:620px;margin-bottom:clamp(28px,4.5vw,50px);animation:fadeUp .9s .4s ease both;font-weight:400}
-.hero-btns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:clamp(36px,6vw,72px);animation:fadeUp .9s .52s ease both}
+#hero {
+  height: 100vh;
+  height: 100svh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #040c1b;
+}
+.hero-bg-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+.hero-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  transform: translateZ(0);
+  will-change: transform;
+}
+.hero-overlay-gradient {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 2;
+}
+.hero-content-centered {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  max-width: 960px;
+  padding: 0 var(--px);
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-30px);
+}
+.hero-logo-wrapper {
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: heroFadeInDown 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-logo-icon {
+  height: 90px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.35)) brightness(0) invert(1);
+  margin: 0 auto;
+}
+.hero-title-centered {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(30px, 5.5vw, 64px);
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 18px;
+  letter-spacing: -1px;
+  word-break: break-word;
+  opacity: 0;
+  animation: heroFadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.hero-title-centered span {
+  background: linear-gradient(135deg, #f5a623, #ffd234 55%, #ffb347);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+.hero-subtitle-centered {
+  font-size: clamp(14px, 1.8vw, 19px);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  max-width: 720px;
+  margin-bottom: 40px;
+  font-weight: 400;
+  opacity: 0;
+  animation: heroFadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+}
+.hero-cta-wrapper {
+  opacity: 0;
+  animation: heroFadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+}
+.hero-scroll-btn {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0;
+  animation: heroFadeIn 1.5s ease 1.2s both;
+  transition: color 0.3s, opacity 0.3s;
+}
+.hero-scroll-btn:hover {
+  color: var(--gold);
+}
+.scroll-mouse-icon {
+  width: 26px;
+  height: 40px;
+  border: 2px solid currentColor;
+  border-radius: 13px;
+  position: relative;
+  opacity: 0.9;
+}
+.scroll-mouse-wheel {
+  width: 4px;
+  height: 8px;
+  background-color: currentColor;
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollWheelPulse 2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+.scroll-down-arrow {
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  animation: arrowPulse 2s ease-in-out infinite;
+}
+
+/* ─── NEW KEYFRAMES ─── */
+
+@keyframes heroFadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to { opacity: 0.8; }
+}
+@keyframes scrollWheelPulse {
+  0% { top: 6px; opacity: 1; height: 8px; }
+  30% { top: 12px; opacity: 0.5; height: 12px; }
+  35% { top: 18px; opacity: 0; height: 4px; }
+  36% { top: 6px; opacity: 0; height: 8px; }
+  60%, 100% { top: 6px; opacity: 1; height: 8px; }
+}
+@keyframes arrowPulse {
+  0% { transform: rotate(45deg) translate(-2px, -2px); opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { transform: rotate(45deg) translate(2px, 2px); opacity: 0.3; }
+}
 
 /* ─── BUTTONS ─── */
 .btn-primary{background:linear-gradient(135deg,var(--gold),var(--yellow));color:var(--navy);padding:clamp(13px,1.8vw,18px) clamp(22px,3.5vw,42px);border-radius:var(--r-btn);font-weight:800;font-size:clamp(13px,1.4vw,15px);text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .35s var(--ease),box-shadow .35s;box-shadow:0 8px 30px rgba(245,166,35,.4);font-family:'Montserrat',sans-serif;letter-spacing:.3px;position:relative;overflow:hidden;min-height:48px;white-space:nowrap;cursor:pointer;border:none}
@@ -392,7 +765,7 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 @media(max-width:1024px){
   :root{--nav-h:96px;--logo-h:72px;--logo-text-gvp-sz:24px;--logo-text-energy-sz:20px;--page-nav-h:48px;--page-nav-fs:11.5px;--page-nav-pad:0 14px}
   #header.scrolled{--nav-h:68px;--logo-h:48px;--logo-text-gvp-sz:18px;--logo-text-energy-sz:15px}
-  #header.scrolled ~ .page-nav{--page-nav-h:38px;--page-nav-fs:10px;--page-nav-pad:0 10px}
+  #header.scrolled ~ .page-nav{margin-top:68px;top:68px;--page-nav-h:38px;--page-nav-fs:10px;--page-nav-pad:0 10px}
   .nav-links{display:none}
   .hamburger{display:flex}
   .form-inner{grid-template-columns:1fr;gap:40px}
@@ -407,9 +780,12 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 @media(max-width:768px){
   :root{--nav-h:90px;--logo-h:68px;--logo-text-gvp-sz:22px;--logo-text-energy-sz:18px;--page-nav-h:46px;--page-nav-fs:11px;--page-nav-pad:0 12px}
   #header.scrolled{--nav-h:64px;--logo-h:44px;--logo-text-gvp-sz:16px;--logo-text-energy-sz:13px}
-  #header.scrolled ~ .page-nav{--page-nav-h:36px;--page-nav-fs:9.5px;--page-nav-pad:0 8px}
+  #header.scrolled ~ .page-nav{margin-top:64px;top:64px;--page-nav-h:36px;--page-nav-fs:9.5px;--page-nav-pad:0 8px}
   #header{padding:0 4%}
-  .hero-content{padding:88px 4% 52px}
+  .hero-logo-icon{height:68px}
+  .hero-title-centered{font-size:clamp(24px,6vw,44px);margin-bottom:14px}
+  .hero-subtitle-centered{font-size:15px;margin-bottom:28px}
+  .hero-scroll-btn{bottom:24px}
   .section{padding:56px 4%}
   .hero-btns{flex-direction:column;width:100%;max-width:360px}
   .btn-primary,.btn-secondary{width:100%;justify-content:center}
@@ -435,12 +811,11 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
 @media(max-width:480px){
   :root{--nav-h:78px;--logo-h:56px;--logo-text-gvp-sz:20px;--logo-text-energy-sz:16px;--page-nav-h:44px;--page-nav-fs:10.5px;--page-nav-pad:0 10px}
   #header.scrolled{--nav-h:62px;--logo-h:42px;--logo-text-gvp-sz:16px;--logo-text-energy-sz:13px}
-  #header.scrolled ~ .page-nav{--page-nav-h:34px;--page-nav-fs:9px;--page-nav-pad:0 6px}
+  #header.scrolled ~ .page-nav{margin-top:62px;top:62px;--page-nav-h:34px;--page-nav-fs:9px;--page-nav-pad:0 6px}
   #header{padding:0 4%}
-  .hero-content{padding:80px 4% 48px}
-  .hero-badge{font-size:9px;padding:8px 14px;letter-spacing:1.2px}
-  .hero-h1{font-size:clamp(26px,8vw,36px);line-height:1.1}
-  .hero-sub{font-size:14px}
+  .hero-logo-icon{height:56px}
+  .hero-title-centered{font-size:clamp(20px,7vw,32px)}
+  .hero-subtitle-centered{font-size:13.5px}
   .hero-stats{grid-template-columns:repeat(2,1fr);border-radius:16px}
   .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.05)}
   .stat-item:nth-child(odd){border-right:1px solid rgba(255,255,255,.05)}
@@ -478,11 +853,11 @@ footer::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;back
   .faq-item.open .faq-a{padding:0 18px 18px}
 }
 @media(max-width:360px){
-  :root{--nav-h:74px;--logo-h:52px;--logo-text-gvp-sz:18px;--logo-text-energy-sz:14px;--page-nav-h:42px;--page-nav-fs:10px;--page-nav-pad:0 8px}
-  #header.scrolled{--nav-h:58px;--logo-h:38px;--logo-text-gvp-sz:14px;--logo-text-energy-sz:11px}
-  #header.scrolled ~ .page-nav{--page-nav-h:32px;--page-nav-fs:8.5px;--page-nav-pad:0 6px}
+  :root{--nav-h:74px;--logo-h:50px;--logo-text-gvp-sz:15px;--logo-text-energy-sz:11px;--page-nav-h:42px;--page-nav-fs:10px;--page-nav-pad:0 8px}
+  #header.scrolled{--nav-h:58px;--logo-h:38px;--logo-text-gvp-sz:13px;--logo-text-energy-sz:10px}
+  #header.scrolled ~ .page-nav{margin-top:58px;top:58px;--page-nav-h:32px;--page-nav-fs:8.5px;--page-nav-pad:0 6px}
   #header{padding:0 3.5%}
-  .hero-h1{font-size:clamp(22px,8.5vw,30px)}
+  .hero-title-centered{font-size:clamp(18px,8.5vw,26px)}
   .section{padding:40px 3.5%}
   .stat-item{padding:14px 8px}
   .hero-stats{grid-template-columns:repeat(2,1fr)}
@@ -498,6 +873,241 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
   .trust-track{animation:none}
   .reveal{opacity:1;transform:none;transition:none}
 }
+/* ─── PREMIUM ARTWORK INTEGRATION ─── */
+
+/* Floating animation for 3D artwork */
+@keyframes artFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  30%       { transform: translateY(-14px) rotate(1.5deg); }
+  60%       { transform: translateY(-7px) rotate(-1deg); }
+  80%       { transform: translateY(-11px) rotate(0.8deg); }
+}
+
+@keyframes artFloatLight {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* Blue soft glow pulse */
+@keyframes glowPulse {
+  0%, 100% { filter: drop-shadow(0 0 18px rgba(59,130,246,.35)) drop-shadow(0 8px 30px rgba(0,0,0,.25)); }
+  50%       { filter: drop-shadow(0 0 36px rgba(59,130,246,.6)) drop-shadow(0 12px 40px rgba(0,0,0,.3)); }
+}
+
+/* Gold glow for ROI calculator */
+@keyframes glowGold {
+  0%, 100% { filter: drop-shadow(0 0 18px rgba(245,166,35,.4)) drop-shadow(0 8px 32px rgba(0,0,0,.3)); }
+  50%       { filter: drop-shadow(0 0 38px rgba(245,166,35,.7)) drop-shadow(0 14px 44px rgba(0,0,0,.35)); }
+}
+
+/* Energy line glow animation */
+@keyframes energyGlow {
+  0%, 100% { filter: drop-shadow(0 0 12px rgba(59,130,246,.4)) drop-shadow(0 4px 20px rgba(0,0,0,.2)); opacity: 1; }
+  50%       { filter: drop-shadow(0 0 28px rgba(59,130,246,.75)) drop-shadow(0 6px 28px rgba(0,0,0,.25)); opacity: 0.95; }
+}
+
+/* Fade-in when entering viewport */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Why Choose Solar — Layout with 3D panel ── */
+.why-section-inner {
+  display: grid;
+  grid-template-columns: 1fr 460px;
+  gap: 48px;
+  align-items: center;
+}
+
+.why-artwork-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 380px;
+}
+
+.solar-panel-3d-wrap {
+  width: 100%;
+  max-width: 460px;
+  position: relative;
+  cursor: none;
+  will-change: transform;
+}
+
+.solar-panel-3d-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  animation: artFloat 7s ease-in-out infinite, glowPulse 3.5s ease-in-out infinite;
+  transform-origin: center center;
+  transition: transform 0.1s linear;
+  will-change: transform, filter;
+}
+
+/* Art visible state (set by JS IntersectionObserver) */
+.art-hidden { opacity: 0; transform: translateY(40px); }
+.art-visible { animation: fadeInUp .9s cubic-bezier(.16,1,.3,1) both; }
+
+/* ── Solutions/How Solar Works — Flow diagram on right ── */
+.solutions-with-art {
+  display: grid;
+  grid-template-columns: 1fr 520px;
+  gap: 56px;
+  align-items: start;
+}
+
+.flow-art-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 24px;
+}
+
+.flow-art-wrap img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  animation: artFloatLight 6s ease-in-out infinite, energyGlow 4s ease-in-out infinite;
+  will-change: transform, filter;
+}
+
+/* ── ROI Calculator — 3D Calculator on right ── */
+.roi-with-art {
+  display: grid;
+  grid-template-columns: 1fr 430px;
+  gap: 48px;
+  align-items: start;
+}
+
+.calc-art-wrap {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  padding: 16px 8px;
+  margin-top: 16px;
+}
+
+.calc-art-wrap img {
+  width: 100%;
+  max-width: 430px;
+  height: auto;
+  display: block;
+  border-radius: 14px;
+  animation: artFloat 6.5s ease-in-out infinite, glowGold 3s ease-in-out infinite;
+  will-change: transform, filter;
+}
+
+/* ── Featured Projects Banner ── */
+.projects-showcase-banner {
+  width: 100%;
+  position: relative;
+  margin-bottom: clamp(28px, 4vw, 48px);
+  border-radius: clamp(16px, 2.5vw, 28px);
+  overflow: hidden;
+  box-shadow: 0 20px 70px rgba(0,0,0,.22), 0 4px 18px rgba(0,0,0,.12);
+  aspect-ratio: 16 / 9;
+  background: #071B34;
+}
+
+.projects-showcase-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform .7s cubic-bezier(.4,0,.2,1), opacity .6s ease;
+  opacity: 0;
+  transform: scale(1.03);
+}
+
+.projects-showcase-banner img.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.projects-showcase-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 40%, rgba(4,12,28,.72) 100%);
+  pointer-events: none;
+}
+
+.projects-showcase-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: clamp(18px,3vw,36px) clamp(20px,4vw,48px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.showcase-caption-left h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(16px,2.5vw,26px);
+  color: #fff;
+  margin-bottom: 4px;
+  line-height: 1.2;
+  text-shadow: 0 2px 12px rgba(0,0,0,.4);
+}
+
+.showcase-caption-left p {
+  font-size: clamp(12px,1.3vw,14px);
+  color: rgba(255,255,255,.7);
+  font-weight: 500;
+}
+
+.showcase-caption-badge {
+  background: linear-gradient(135deg, var(--gold), var(--yellow));
+  color: var(--navy);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(11px,1.2vw,13px);
+  padding: 8px 20px;
+  border-radius: 50px;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(245,166,35,.4);
+  letter-spacing: .4px;
+}
+
+/* ── Responsive Breakpoints for Art ── */
+@media (max-width: 1100px) {
+  .why-section-inner { grid-template-columns: 1fr 380px; gap: 36px; }
+  .solutions-with-art { grid-template-columns: 1fr 400px; gap: 36px; }
+  .roi-with-art { grid-template-columns: 1fr 360px; gap: 36px; }
+}
+
+@media (max-width: 900px) {
+  .why-section-inner { grid-template-columns: 1fr; }
+  .why-artwork-col { order: -1; min-height: unset; }
+  .solar-panel-3d-wrap { max-width: 340px; }
+
+  .solutions-with-art { grid-template-columns: 1fr; }
+  .flow-art-wrap { order: -1; }
+  .flow-art-wrap img { max-width: 440px; }
+
+  .roi-with-art { grid-template-columns: 1fr; }
+  .calc-art-wrap { order: -1; }
+  .calc-art-wrap img { max-width: 360px; }
+}
+
+@media (max-width: 600px) {
+  .solar-panel-3d-wrap { max-width: 240px; }
+  .flow-art-wrap img { max-width: 100%; }
+  .calc-art-wrap img { max-width: 280px; }
+}
+
 /* ─── STATUS BADGES ─── */
 .status-badge {
   display: inline-flex;
@@ -583,41 +1193,25 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-pattern"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-glow2"></div>
-  <div class="hero-content">
-    <div class="hero-badge">Maharashtra's #1 Solar EPC Company</div>
-    <h1 class="hero-h1">Maharashtra's Most Trusted<br><span>Solar EPC Company</span><br>13 Years. 500+ Projects.</h1>
-    <p class="hero-sub">Residential, Commercial & Industrial Solar Installation across Maharashtra. Complete EPC, Net Metering, Subsidy Assistance & O&M — all under one roof.</p>
-    <div class="hero-btns">
+  <div class="hero-bg-container">
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-overlay-gradient"></div>
+  <div class="hero-content-centered">
+    <h1 class="hero-title-centered">Maharashtra's Most Trusted<br><span>Solar EPC Company</span></h1>
+    <p class="hero-subtitle-centered">Residential, Commercial & Industrial Solar Rooftop installations. 13+ Years of Experience, 500+ Projects Completed successfully across Maharashtra.</p>
+    <div class="hero-cta-wrapper">
       <a href="#contact-section" class="btn-primary">⚡ Get Free Solar Quote</a>
-      <a href="#projects" class="btn-secondary">📋 View Our Projects</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-num" data-target="13">0</div>
-        <div class="stat-label">Years Experience</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num" data-target="500">0</div>
-        <div class="stat-label">Installations</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">11MW+</div>
-        <div class="stat-label">Capacity Installed</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">70%</div>
-        <div class="stat-label">Bill Reduction</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">On-Time Delivery</div>
-      </div>
     </div>
   </div>
+  <a href="#services" class="hero-scroll-btn" aria-label="Scroll Down">
+    <div class="scroll-mouse-icon">
+      <div class="scroll-mouse-wheel"></div>
+    </div>
+    <div class="scroll-down-arrow"></div>
+  </a>
 </section>
 
 <!-- TRUST STRIP -->
@@ -712,36 +1306,52 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
       <h2 class="section-title white">Solar Systems for Every Need —<br>Home to Heavy Industry</h2>
       <p class="section-sub white">Whether you're a homeowner wanting to cut bills or a factory owner saving crores — we have the right system.</p>
     </div>
-    <div class="solutions-grid reveal">
-      <div class="sol-card">
-        <div class="sol-emoji">🏠</div>
-        <div class="sol-title">Residential Solar</div>
-        <div class="sol-range">1kW – 10kW</div>
-        <div class="sol-desc">Homes, apartments, housing societies. Save ₹1,500–₹10,000/month. Subsidy up to ₹78,000.</div>
+    <div class="solutions-with-art">
+      <div class="solutions-grid reveal">
+        <div class="sol-card">
+          <div class="sol-emoji">🏠</div>
+          <div class="sol-title">Residential Solar</div>
+          <div class="sol-range">1kW – 10kW</div>
+          <div class="sol-desc">Homes, apartments, housing societies. Save ₹1,500–₹10,000/month. Subsidy up to ₹78,000.</div>
+        </div>
+        <div class="sol-card">
+          <div class="sol-emoji">🏢</div>
+          <div class="sol-title">Commercial Solar</div>
+          <div class="sol-range">10kW – 500kW</div>
+          <div class="sol-desc">Shops, offices, schools, hospitals. 4–5 year payback. Accelerated depreciation benefit.</div>
+        </div>
+        <div class="sol-card">
+          <div class="sol-emoji">🏭</div>
+          <div class="sol-title">Industrial Solar</div>
+          <div class="sol-range">500kW – 5MW</div>
+          <div class="sol-desc">Factories, textile mills, cold storage. Save ₹30–₹80 lakh/year. Proven 580kW projects.</div>
+        </div>
+        <div class="sol-card">
+          <div class="sol-emoji">🌾</div>
+          <div class="sol-title">Agricultural Pumps</div>
+          <div class="sol-range">3HP – 10HP</div>
+          <div class="sol-desc">PM KUSUM scheme. Up to 90% subsidy. Farmer pays only 5–10%. Free irrigation for 25 years.</div>
+        </div>
+        <div class="sol-card">
+          <div class="sol-emoji">🔋</div>
+          <div class="sol-title">Hybrid + Battery</div>
+          <div class="sol-range">1kW – 100kW</div>
+          <div class="sol-desc">24×7 power. Lithium or lead-acid options. Best for hospitals, factories with critical loads.</div>
+        </div>
       </div>
-      <div class="sol-card">
-        <div class="sol-emoji">🏢</div>
-        <div class="sol-title">Commercial Solar</div>
-        <div class="sol-range">10kW – 500kW</div>
-        <div class="sol-desc">Shops, offices, schools, hospitals. 4–5 year payback. Accelerated depreciation benefit.</div>
-      </div>
-      <div class="sol-card">
-        <div class="sol-emoji">🏭</div>
-        <div class="sol-title">Industrial Solar</div>
-        <div class="sol-range">500kW – 5MW</div>
-        <div class="sol-desc">Factories, textile mills, cold storage. Save ₹30–₹80 lakh/year. Proven 580kW projects.</div>
-      </div>
-      <div class="sol-card">
-        <div class="sol-emoji">🌾</div>
-        <div class="sol-title">Agricultural Pumps</div>
-        <div class="sol-range">3HP – 10HP</div>
-        <div class="sol-desc">PM KUSUM scheme. Up to 90% subsidy. Farmer pays only 5–10%. Free irrigation for 25 years.</div>
-      </div>
-      <div class="sol-card">
-        <div class="sol-emoji">🔋</div>
-        <div class="sol-title">Hybrid + Battery</div>
-        <div class="sol-range">1kW – 100kW</div>
-        <div class="sol-desc">24×7 power. Lithium or lead-acid options. Best for hospitals, factories with critical loads.</div>
+      <!-- Solar Energy Flow Artwork -->
+      <div class="flow-art-wrap art-hidden" id="flow-art">
+        <picture>
+          <source srcset="assets/images/solar-energy-flow.webp" type="image/webp">
+          <img
+            src="assets/images/solar-energy-flow.jpg"
+            alt="Solar Energy Flow Diagram — Sun to Panels to Inverter to Home and Factory"
+            width="1024"
+            height="768"
+            loading="lazy"
+            decoding="async"
+          >
+        </picture>
       </div>
     </div>
   </div>
@@ -754,6 +1364,30 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
       <span class="section-badge">Portfolio</span>
       <h2 class="section-title">Completed Industrial Solar Projects —<br>Real Proof from Maharashtra</h2>
       <p class="section-sub">Real projects. Real clients. Real savings. See why Maharashtra's largest industries trust GVP Solar Energy.</p>
+    </div>
+    <!-- Premium Industrial Solar Showcase Banner -->
+    <div class="projects-showcase-banner reveal" id="showcase-banner">
+      <picture>
+        <source srcset="assets/images/industrial-solar-project.webp" type="image/webp">
+        <img
+          src="assets/images/industrial-solar-project.jpg"
+          alt="Premium Industrial Solar Installation — Aerial View of Large-Scale Rooftop Solar Plant in Maharashtra"
+          width="1280"
+          height="720"
+          loading="lazy"
+          decoding="async"
+          id="showcase-img"
+          onload="this.classList.add('loaded')"
+        >
+      </picture>
+      <div class="projects-showcase-overlay"></div>
+      <div class="projects-showcase-caption">
+        <div class="showcase-caption-left">
+          <h3>Industrial Solar Excellence — Maharashtra</h3>
+          <p>Large-scale rooftop installations delivering 70–90% electricity cost savings</p>
+        </div>
+        <div class="showcase-caption-badge">500+ Projects Completed</div>
+      </div>
     </div>
     <div class="projects-grid reveal">
       <div class="proj-card">
@@ -1186,13 +1820,31 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
       <h2 class="section-title white">Why 500+ Clients in Maharashtra<br>Trust GVP Solar Energy</h2>
       <p class="section-sub white">We don't just install solar — we become your long-term energy partner.</p>
     </div>
-    <div class="why-grid reveal">
-      <div class="why-card"><div class="why-icon">🏆</div><div><div class="why-title">13+ Years Solar EPC Experience</div><div class="why-text">Operating since 2011 across Maharashtra — deep expertise in residential, commercial and industrial projects.</div></div></div>
-      <div class="why-card"><div class="why-icon">📍</div><div><div class="why-title">Kolhapur-Based Local Experts</div><div class="why-text">Office in Ichalkaranji — fastest response time, deep MSEDCL Kolhapur circle knowledge, site surveys in 24 hours.</div></div></div>
-      <div class="why-card"><div class="why-icon">⚡</div><div><div class="why-title">Industrial Solar Specialists</div><div class="why-text">580kW completed projects — we understand factory load profiles, CEIG approvals and HT metering requirements.</div></div></div>
-      <div class="why-card"><div class="why-icon">🔩</div><div><div class="why-title">Tier-1 Panels Only</div><div class="why-text">Waaree, Adani, Vikram, REC — only globally certified Tier-1 panels. No compromise on quality or warranty.</div></div></div>
-      <div class="why-card"><div class="why-icon">💰</div><div><div class="why-title">Subsidy Application Experts</div><div class="why-text">PM Surya Ghar, SMART Scheme, PM KUSUM — we handle every step of your subsidy application for free.</div></div></div>
-      <div class="why-card"><div class="why-icon">📋</div><div><div class="why-title">Complete EPC — Survey to AMC</div><div class="why-text">Site survey → design → installation → net metering → subsidy → annual maintenance. Nothing is outsourced.</div></div></div>
+    <div class="why-section-inner">
+      <div class="why-grid reveal">
+        <div class="why-card"><div class="why-icon">🏆</div><div><div class="why-title">13+ Years Solar EPC Experience</div><div class="why-text">Operating since 2011 across Maharashtra — deep expertise in residential, commercial and industrial projects.</div></div></div>
+        <div class="why-card"><div class="why-icon">📍</div><div><div class="why-title">Kolhapur-Based Local Experts</div><div class="why-text">Office in Ichalkaranji — fastest response time, deep MSEDCL Kolhapur circle knowledge, site surveys in 24 hours.</div></div></div>
+        <div class="why-card"><div class="why-icon">⚡</div><div><div class="why-title">Industrial Solar Specialists</div><div class="why-text">580kW completed projects — we understand factory load profiles, CEIG approvals and HT metering requirements.</div></div></div>
+        <div class="why-card"><div class="why-icon">🔩</div><div><div class="why-title">Tier-1 Panels Only</div><div class="why-text">Waaree, Adani, Vikram, REC — only globally certified Tier-1 panels. No compromise on quality or warranty.</div></div></div>
+        <div class="why-card"><div class="why-icon">💰</div><div><div class="why-title">Subsidy Application Experts</div><div class="why-text">PM Surya Ghar, SMART Scheme, PM KUSUM — we handle every step of your subsidy application for free.</div></div></div>
+        <div class="why-card"><div class="why-icon">📋</div><div><div class="why-title">Complete EPC — Survey to AMC</div><div class="why-text">Site survey → design → installation → net metering → subsidy → annual maintenance. Nothing is outsourced.</div></div></div>
+      </div>
+      <!-- 3D Floating Solar Panel Artwork -->
+      <div class="why-artwork-col art-hidden" id="why-art-col">
+        <div class="solar-panel-3d-wrap" id="solarPanelWrap">
+          <picture>
+            <source srcset="assets/images/solar-panel-3d.webp" type="image/webp">
+            <img
+              src="assets/images/solar-panel-3d.jpg"
+              alt="3D Floating Solar Panel — Advanced Monocrystalline Technology"
+              width="920"
+              height="690"
+              loading="lazy"
+              decoding="async"
+            >
+          </picture>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1347,87 +1999,107 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
       <h2 class="section-title">Solar ROI Calculator — Know Your Exact<br>Savings Before You Invest</h2>
       <p class="section-sub">Based on real MSEDCL tariff rates and GVP Solar's 500+ completed installations across Maharashtra.</p>
     </div>
-    <div class="roi-tabs reveal">
-      <button class="roi-tab active" onclick="switchTab('res',this)">🏠 Residential</button>
-      <button class="roi-tab" onclick="switchTab('com',this)">🏢 Commercial</button>
-      <button class="roi-tab" onclick="switchTab('ind',this)">🏭 Industrial</button>
-      <button class="roi-tab" onclick="switchTab('cmp',this)">📊 vs Other Investments</button>
-    </div>
-    <div id="tab-res" class="roi-panel active reveal">
-      <p style="margin-bottom:20px;color:var(--text2);font-size:14px;font-style:italic">Based on MSEDCL residential tariff ₹8–₹10/unit with 3% annual escalation</p>
-      <div style="overflow-x:auto">
-        <table class="price-table">
-          <thead><tr><th>Monthly Bill</th><th>Best System</th><th>Cost After Subsidy</th><th>Monthly Savings</th><th>Payback</th><th>25-Year Saving</th></tr></thead>
-          <tbody>
-            <tr><td>₹1,000–₹2,000</td><td class="highlight">2 kW</td><td>₹60K–₹85K</td><td class="savings">₹900–₹1,500</td><td>4–5 years</td><td class="gold-text">₹3.5L–₹5L</td></tr>
-            <tr><td>₹2,000–₹3,500</td><td class="highlight">3 kW</td><td>₹92K–₹1.22L</td><td class="savings">₹1,800–₹2,800</td><td>4–5 years</td><td class="gold-text">₹5L–₹8L</td></tr>
-            <tr><td>₹3,500–₹6,000</td><td class="highlight">5 kW</td><td>₹2.02L–₹2.42L</td><td class="savings">₹3,000–₹5,000</td><td>4–5 years</td><td class="gold-text">₹9L–₹15L</td></tr>
-            <tr><td>₹6,000–₹10,000</td><td class="highlight">7–8 kW</td><td>₹3.72L–₹4.42L</td><td class="savings">₹5,000–₹9,000</td><td>5–6 years</td><td class="gold-text">₹15L–₹25L</td></tr>
-            <tr><td>Above ₹10,000</td><td class="highlight">10 kW</td><td>₹4.52L–₹5.32L</td><td class="savings">₹8,000–₹12,000</td><td>5–6 years</td><td class="gold-text">₹24L–₹36L</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div id="tab-com" class="roi-panel">
-      <p style="margin-bottom:20px;color:var(--text2);font-size:14px;font-style:italic">Based on MSEDCL commercial tariff ~₹9/unit + 40% accelerated depreciation</p>
-      <div style="overflow-x:auto">
-        <table class="price-table">
-          <thead><tr><th>System</th><th>Cost</th><th>Annual Saving</th><th>Payback</th><th>25-Year Saving</th></tr></thead>
-          <tbody>
-            <tr><td class="highlight">25 kW</td><td>₹12L–₹15L</td><td class="savings">₹2.5L–₹3.5L</td><td>4–5 yrs</td><td class="gold-text">₹60L–₹87L</td></tr>
-            <tr><td class="highlight">100 kW</td><td>₹42L–₹52L</td><td class="savings">₹10L–₹14L</td><td>4–5 yrs</td><td class="gold-text">₹2.5Cr–₹3.5Cr</td></tr>
-            <tr><td class="highlight">500 kW</td><td>₹2.0Cr–₹2.5Cr</td><td class="savings">₹50L–₹65L</td><td>4–5 yrs</td><td class="gold-text">₹12Cr–₹16Cr</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div id="tab-ind" class="roi-panel">
-      <p style="margin-bottom:20px;color:var(--text2);font-size:14px;font-style:italic">Based on HT industrial tariff ₹9.20/unit, FY 2025–26, Maharashtra</p>
-      <div style="overflow-x:auto">
-        <table class="price-table">
-          <thead><tr><th>System</th><th>Cost</th><th>Annual Saving</th><th>Payback</th><th>25-Year Saving</th></tr></thead>
-          <tbody>
-            <tr><td class="highlight">250 kW</td><td>₹1.2Cr–₹1.5Cr</td><td class="savings">₹28L–₹35L</td><td>4–5 yrs</td><td class="gold-text">₹7Cr–₹8.5Cr</td></tr>
-            <tr><td class="highlight">500 kW</td><td>₹2.2Cr–₹2.7Cr</td><td class="savings">₹55L–₹70L</td><td>4–5 yrs</td><td class="gold-text">₹13Cr–₹17Cr</td></tr>
-            <tr><td class="highlight">1 MW</td><td>₹4.15Cr–₹4.5Cr</td><td class="savings">₹1.0Cr–₹1.4Cr</td><td>3–4 yrs</td><td class="gold-text">₹26Cr–₹35Cr</td></tr>
-            <tr><td class="highlight">2 MW</td><td>₹8.5Cr–₹9.5Cr</td><td class="savings">₹2.0Cr–₹2.8Cr</td><td>3–4 yrs</td><td class="gold-text">₹50Cr–₹70Cr</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div id="tab-cmp" class="roi-panel">
-      <p style="margin-bottom:28px;color:var(--text2);font-size:14px">What happens if you invest ₹3 lakh in solar vs other options — over 25 years?</p>
-      <div class="compare-grid">
-        <div class="compare-card solar">
-          <div class="compare-icon">☀️</div>
-          <div class="compare-type">5kW Solar (after ₹78K subsidy)</div>
-          <div class="compare-return">₹9L–₹15L</div>
-          <div style="font-size:12px;color:rgba(255,255,255,.8);margin-top:4px">Saved on bills + ₹2.4L asset value</div>
-          <div class="compare-risk">Risk: ZERO — Guaranteed</div>
+    <div class="roi-with-art">
+      <div class="roi-content-col">
+        <div class="roi-tabs reveal">
+          <button class="roi-tab active" onclick="switchTab('res',this)">🏠 Residential</button>
+          <button class="roi-tab" onclick="switchTab('com',this)">🏢 Commercial</button>
+          <button class="roi-tab" onclick="switchTab('ind',this)">🏭 Industrial</button>
+          <button class="roi-tab" onclick="switchTab('cmp',this)">📊 vs Other Investments</button>
         </div>
-        <div class="compare-card other">
-          <div class="compare-icon">🏦</div>
-          <div class="compare-type">Fixed Deposit (6%)</div>
-          <div class="compare-return">₹8.6L</div>
-          <div class="compare-risk">Risk: Low</div>
+        <div id="tab-res" class="roi-panel active reveal">
+          <p style="margin-bottom:20px;color:var(--text2);font-size:14px;font-style:italic">Based on MSEDCL residential tariff ₹8–₹10/unit with 3% annual escalation</p>
+          <div style="overflow-x:auto">
+            <table class="price-table">
+              <thead><tr><th>Monthly Bill</th><th>Best System</th><th>Cost After Subsidy</th><th>Monthly Savings</th><th>Payback</th><th>25-Year Saving</th></tr></thead>
+              <tbody>
+                <tr><td>₹1,000–₹2,000</td><td class="highlight">2 kW</td><td>₹60K–₹85K</td><td class="savings">₹900–₹1,500</td><td>4–5 years</td><td class="gold-text">₹3.5L–₹5L</td></tr>
+                <tr><td>₹2,000–₹3,500</td><td class="highlight">3 kW</td><td>₹92K–₹1.22L</td><td class="savings">₹1,800–₹2,800</td><td>4–5 years</td><td class="gold-text">₹5L–₹8L</td></tr>
+                <tr><td>₹3,500–₹6,000</td><td class="highlight">5 kW</td><td>₹2.02L–₹2.42L</td><td class="savings">₹3,000–₹5,000</td><td>4–5 years</td><td class="gold-text">₹9L–₹15L</td></tr>
+                <tr><td>₹6,000–₹10,000</td><td class="highlight">7–8 kW</td><td>₹3.72L–₹4.42L</td><td class="savings">₹5,000–₹9,000</td><td>5–6 years</td><td class="gold-text">₹15L–₹25L</td></tr>
+                <tr><td>Above ₹10,000</td><td class="highlight">10 kW</td><td>₹4.52L–₹5.32L</td><td class="savings">₹8,000–₹12,000</td><td>5–6 years</td><td class="gold-text">₹24L–₹36L</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="compare-card other">
-          <div class="compare-icon">🪙</div>
-          <div class="compare-type">Gold Investment</div>
-          <div class="compare-return">₹12L–₹20L</div>
-          <div class="compare-risk">Risk: Medium</div>
+        <div id="tab-com" class="roi-panel">
+          <p style="margin-bottom:20px;color:var(--text2);font-size:14px;font-style:italic">Based on MSEDCL commercial tariff ~₹9/unit + 40% accelerated depreciation</p>
+          <div style="overflow-x:auto">
+            <table class="price-table">
+              <thead><tr><th>System</th><th>Cost</th><th>Annual Saving</th><th>Payback</th><th>25-Year Saving</th></tr></thead>
+              <tbody>
+                <tr><td class="highlight">25 kW</td><td>₹12L–₹15L</td><td class="savings">₹2.5L–₹3.5L</td><td>4–5 yrs</td><td class="gold-text">₹60L–₹87L</td></tr>
+                <tr><td class="highlight">100 kW</td><td>₹42L–₹52L</td><td class="savings">₹10L–₹14L</td><td>4–5 yrs</td><td class="gold-text">₹2.5Cr–₹3.5Cr</td></tr>
+                <tr><td class="highlight">500 kW</td><td>₹2.0Cr–₹2.5Cr</td><td class="savings">₹50L–₹65L</td><td>4–5 yrs</td><td class="gold-text">₹12Cr–₹16Cr</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div class="compare-card other">
-          <div class="compare-icon">📈</div>
-          <div class="compare-type">Mutual Funds (12% avg)</div>
-          <div class="compare-return">₹17L</div>
-          <div class="compare-risk">Risk: HIGH — Market dependent</div>
+        <div id="tab-ind" class="roi-panel">
+          <p style="margin-bottom:20px;color:var(--text2);font-size:14px;font-style:italic">Based on HT industrial tariff ₹9.20/unit, FY 2025–26, Maharashtra</p>
+          <div style="overflow-x:auto">
+            <table class="price-table">
+              <thead><tr><th>System</th><th>Cost</th><th>Annual Saving</th><th>Payback</th><th>25-Year Saving</th></tr></thead>
+              <tbody>
+                <tr><td class="highlight">250 kW</td><td>₹1.2Cr–₹1.5Cr</td><td class="savings">₹28L–₹35L</td><td>4–5 yrs</td><td class="gold-text">₹7Cr–₹8.5Cr</td></tr>
+                <tr><td class="highlight">500 kW</td><td>₹2.2Cr–₹2.7Cr</td><td class="savings">₹55L–₹70L</td><td>4–5 yrs</td><td class="gold-text">₹13Cr–₹17Cr</td></tr>
+                <tr><td class="highlight">1 MW</td><td>₹4.15Cr–₹4.5Cr</td><td class="savings">₹1.0Cr–₹1.4Cr</td><td>3–4 yrs</td><td class="gold-text">₹26Cr–₹35Cr</td></tr>
+                <tr><td class="highlight">2 MW</td><td>₹8.5Cr–₹9.5Cr</td><td class="savings">₹2.0Cr–₹2.8Cr</td><td>3–4 yrs</td><td class="gold-text">₹50Cr–₹70Cr</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div id="tab-cmp" class="roi-panel">
+          <p style="margin-bottom:28px;color:var(--text2);font-size:14px">What happens if you invest ₹3 lakh in solar vs other options — over 25 years?</p>
+          <div class="compare-grid">
+            <div class="compare-card solar">
+              <div class="compare-icon">☀️</div>
+              <div class="compare-type">5kW Solar (after ₹78K subsidy)</div>
+              <div class="compare-return">₹9L–₹15L</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.8);margin-top:4px">Saved on bills + ₹2.4L asset value</div>
+              <div class="compare-risk">Risk: ZERO — Guaranteed</div>
+            </div>
+            <div class="compare-card other">
+              <div class="compare-icon">🏦</div>
+              <div class="compare-type">Fixed Deposit (6%)</div>
+              <div class="compare-return">₹8.6L</div>
+              <div class="compare-risk">Risk: Low</div>
+            </div>
+            <div class="compare-card other">
+              <div class="compare-icon">🪙</div>
+              <div class="compare-type">Gold Investment</div>
+              <div class="compare-return">₹12L–₹20L</div>
+              <div class="compare-risk">Risk: Medium</div>
+            </div>
+            <div class="compare-card other">
+              <div class="compare-icon">📈</div>
+              <div class="compare-type">Mutual Funds (12% avg)</div>
+              <div class="compare-return">₹17L</div>
+              <div class="compare-risk">Risk: HIGH — Market dependent</div>
+            </div>
+          </div>
+          <div class="table-note" style="margin-top:20px">🌟 Solar is the ONLY investment with guaranteed, risk-free returns that are protected from electricity tariff inflation. Your savings automatically grow as MSEDCL tariffs rise every year.</div>
         </div>
       </div>
-      <div class="table-note" style="margin-top:20px">🌟 Solar is the ONLY investment with guaranteed, risk-free returns that are protected from electricity tariff inflation. Your savings automatically grow as MSEDCL tariffs rise every year.</div>
+      <!-- 3D ROI Calculator Artwork -->
+      <div class="calc-art-wrap art-hidden" id="calc-art">
+        <picture>
+          <source srcset="assets/images/roi-calculator-3d.webp" type="image/webp">
+          <img
+            src="assets/images/roi-calculator-3d.jpg"
+            alt="3D Solar ROI Calculator — Gold Premium Calculator with Savings Growth Chart"
+            width="1024"
+            height="576"
+            loading="lazy"
+            decoding="async"
+            id="calcArtWrap"
+          >
+        </picture>
+      </div>
     </div>
   </div>
 </section>
+
 
 <!-- INDUSTRIAL -->
 <section id="industrial" class="section section-navy">
@@ -1800,32 +2472,44 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offse
 </footer>
 
 <script>
-// Header scroll
-const h=document.getElementById('header');
-const pn=document.querySelector('.page-nav');
+// Header scroll & state management
+const h = document.getElementById('header');
+const pn = document.querySelector('.page-nav');
 
 function syncHeaderHeights() {
-  if(h && pn) {
+  if (h && pn) {
     const height = h.offsetHeight;
     pn.style.top = height + 'px';
     pn.style.marginTop = height + 'px';
   }
 }
 
-window.addEventListener('scroll',()=>{
-  if(window.scrollY>50) h.classList.add('scrolled');
-  else h.classList.remove('scrolled');
+function updateHeaderState() {
+  if (h) {
+    if (window.scrollY > 50) {
+      h.classList.add('scrolled');
+    } else {
+      h.classList.remove('scrolled');
+    }
+  }
   syncHeaderHeights();
-});
-window.addEventListener('resize', syncHeaderHeights);
-window.addEventListener('DOMContentLoaded', syncHeaderHeights);
-window.addEventListener('load', syncHeaderHeights);
+}
 
-if(typeof ResizeObserver !== 'undefined' && h) {
+// Initial state application on load
+updateHeaderState();
+
+// Attach state updates to all window events
+window.addEventListener('scroll', updateHeaderState);
+window.addEventListener('resize', updateHeaderState);
+window.addEventListener('DOMContentLoaded', updateHeaderState);
+window.addEventListener('load', updateHeaderState);
+window.addEventListener('hashchange', updateHeaderState);
+window.addEventListener('popstate', updateHeaderState);
+
+if (typeof ResizeObserver !== 'undefined' && h) {
   const ro = new ResizeObserver(syncHeaderHeights);
   ro.observe(h);
 }
-syncHeaderHeights();
 
 // Mobile menu
 function toggleMenu(){
@@ -1905,6 +2589,74 @@ document.querySelectorAll('.btn-submit').forEach(btn=>{
     },4000);
   });
 });
+// ─── PREMIUM ARTWORK ANIMATIONS ───
+
+// Fade-in for artwork elements when they enter viewport
+const artObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.remove('art-hidden');
+      e.target.classList.add('art-visible');
+      artObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.18 });
+
+document.querySelectorAll('.art-hidden').forEach(el => artObserver.observe(el));
+
+// Showcase banner image lazy fade-in
+const showcaseImg = document.getElementById('showcase-img');
+if (showcaseImg) {
+  if (showcaseImg.complete) showcaseImg.classList.add('loaded');
+}
+
+// Mouse parallax for 3D artworks (solar panel + calculator)
+(function() {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const panels = [
+    { wrap: document.getElementById('solarPanelWrap'), strength: 14 },
+    { wrap: document.getElementById('calcArtWrap'),    strength: 10 },
+  ];
+
+  let ticking = false;
+  let mouseX = 0, mouseY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        panels.forEach(({ wrap, strength }) => {
+          if (!wrap) return;
+          const rect = wrap.closest('section') ? wrap.closest('section').getBoundingClientRect() : null;
+          if (!rect) return;
+          // Only apply parallax when section is near viewport
+          if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = (mouseX - cx) / window.innerWidth;
+          const dy = (mouseY - cy) / window.innerHeight;
+          const tx = dx * strength;
+          const ty = dy * strength;
+          const rx = dy * (strength * 0.6);
+          const ry = -dx * (strength * 0.6);
+          wrap.style.transform = `translate(${tx}px, ${ty}px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+
+  // Reset parallax when mouse leaves window
+  document.addEventListener('mouseleave', () => {
+    panels.forEach(({ wrap }) => {
+      if (wrap) wrap.style.transform = '';
+    });
+  });
+})();
 </script>
 </body>
 </html>
